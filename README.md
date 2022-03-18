@@ -3,7 +3,6 @@ A front-end clone project of the Spotify web player. The project was created usi
 
 ## Table of Contents
 - [Description](#description)
-- [Motivation](#motivation)
 - [Tech/Framework Used](#techframework-used)
 - [Installation](#installation)
 - [Architechture](#architecture)
@@ -27,10 +26,6 @@ If a user login to a premium account (due to the limitation of the available API
 ![Remote player demonstration](https://github.com/JL978/spotify-clone-client/blob/master/demo/RemotePlay.gif)
 *Remote player demonstration*
 
-## Motivation
-This project was created by me mainly to teach myself React development. Since the point of this project was not to make great UI/UX design choices, I chose to create a clone of a well established  product as to shorten my learning time and not to focus on the wrong thing. Since I am already a heavy Spotify user and therefore I thought it would be an interesting challenge to tackle. 
-
-The majority of the react components and logic was written from scratch by myself. I chose not to use existing component libraries because that forces me to both get a really deep understanding of React and get as much practice as I could with React.
 
 ## Tech/Framework Used
 * React (create-react-app CLI)
@@ -68,12 +63,4 @@ As mentioned from before this app needs to be used with a authentication server 
 
 As far as I know, this is the safest way to handle keys in OAuth flow.  
 
-### Custom hooks and utilities
 
-One of the more interesting functionality from this project is the infinite scroll on playlists and search results. This feature was made using custom hooks and integration with the Spotify API pagination system.
-
-The hooks was named useInfiScroll and useTokenScroll, they are both effectively the same with the useTokenScroll requesting for private information with the access token. The hook make use of useState, useRef, useCallback and the IntersectionObserver API. It takes in a setList (from a useState hook) function from the parent component (which is use internally to set the paginated list) and return a useCallback ref to be passed to the last element of the list and a setNext to store the next paginated uri during initial setup. The challenge of using ref here is the use of functional component in this project which one cannot simply pass a ref parameter to. The solution to this is using React.forwardRef on the child component. One thing I would do different next time is to use [Composition as much as possible instead of Inheritance](https://reactjs.org/docs/composition-vs-inheritance.html) so that I don't have to pass refs through multiple component levels.
-
-Another interesting feature of this app is the live search feature where search results are updated as the user type into the search box. In doing this, the app is making a new request to the API everytime a new letter is entered. However, sometimes typing can be a faster than the request is able to finish and the request may become stale as the user type. Therefore, being able to cancel the request on the fly is needed.  
-
-[More coming soon...]
